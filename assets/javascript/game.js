@@ -13,7 +13,7 @@ var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
 
 
 document.onkeyup = function(event) {
-    var userGuess = event.key;
+    var userGuess = event.key.toLowerCase();
     if (userGuess === computerGuess) {
         cg();
         lettersGuessed = [];
@@ -21,12 +21,12 @@ document.onkeyup = function(event) {
         guesses = 10;
     }
 
-    else if (guesses >= 1 && ( -1 === lettersGuessed.indexOf(userGuess))){
+    else if (guesses > 1 && ( -1 === lettersGuessed.indexOf(userGuess)) && (-1 < alphabet.indexOf(userGuess))){
         guesses--;
         lettersGuessed.push(userGuess);
     }
 
-    else if (guesses === 0) {
+    else if (guesses === 1 && ( -1 === lettersGuessed.indexOf(userGuess)) && (-1 < alphabet.indexOf(userGuess))) {
         losses++
         guesses = 10;
         lettersGuessed = [];
