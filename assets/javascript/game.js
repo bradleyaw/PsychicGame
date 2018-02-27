@@ -6,7 +6,7 @@ var guesses = 10;
 var lettersGuessed = []; 
 
 function cg() {
-    var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+    computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
 }
 
 var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
@@ -15,24 +15,25 @@ var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
 document.onkeyup = function(event) {
     var userGuess = event.key;
     if (userGuess === computerGuess) {
-    cg();
-    lettersGuessed = [];
-    wins++;
-    guesses = 10;
-}
-
-    else if (guesses > 1){
-        if ( -1 === lettersGuessed.indexOf(userGuess))
-        guesses--;
-        lettersGuessed.push(String.fromCharCode(event.keyCode));
+        cg();
+        lettersGuessed = [];
+        wins++;
+        guesses = 10;
     }
-    
-    else if (guesses === 1){
-        losses++;
+
+    else if (guesses >= 1 && ( -1 === lettersGuessed.indexOf(userGuess))){
+        guesses--;
+        lettersGuessed.push(userGuess);
+    }
+
+    else if (guesses === 0) {
+        losses++
         guesses = 10;
         lettersGuessed = [];
         cg();
     }
+
+
 
     var html =
         "<h1>The Psychic Game</h1>" +
